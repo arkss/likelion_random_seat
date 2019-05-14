@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .container {
+            width: 100%;
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .content {
+            display: flex;
+            width: 100%;
+            column-count: 2;
+        }
+
+        .left_content {
+            width: 20%;
+        }
+
+        .right_content {
+            width: 80%;
+            border: 1px solid black;
+            padding: 30px;
+        }
+
+        .par {
+            border: 1px solid black;
+            padding: 30px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .par_check {
+            width: 20px;
+            height: 20px;
+        }
+
+        .teacher_seat_container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+
+        }
+
+        .teacher_seat {
+            border: 1px solid black;
+            padding: 20px;
+            font-size: 50px;
+        }
+
+        .student_seat_container {
+            display: flex;
+
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
+        .student_seat {
+            border: 1px solid black;
+            padding: 20px;
+            font-size: 50px;
+            width: 20%;
+            margin: 30px 2.5%;
+
+            box-sizing: border-box;
+        }
+
+        .random_btn_container {
+            display: flex;
+            justify-content: center;
+        }
+
+        .random_btn {
+
+            padding: 30px;
+            font-size: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">멋사 7기 자리배치표</div>
+        <form method="POST" action="{% url 'random' %}">
+            {% csrf_token %}
+
+            <div class="content">
+                <div class="left_content">
+                    <div class="par_list">
+                        {% for lion in lions %}
+                        <div class="par">
+                            <div class="par_name">
+                                {{lion.name}}
+                            </div>
+                            <div class="par_check_container">
+                                <input class="par_check" name="{{lion.name}}" type="checkbox">
+                            </div>
+
+                        </div>
+
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="right_content">
+                    <div class="teacher_seat_container">
+                        <div class="teacher_seat">
+                            강민성
+                        </div>
+
+                    </div>
+                    <div class="student_seat_container">
+                        <div class="student_seat">
+                            김상현
+                        </div>
+                        <div class="student_seat">
+                            이성빈
+                        </div>
+                        <div class="student_seat">
+                            김상현
+                        </div>
+                        <div class="student_seat">
+                            이성빈
+                        </div>
+                        <div class="student_seat">
+                            김상현
+                        </div>
+                        <div class="student_seat">
+                            이성빈
+                        </div>
+                    </div>
+                    <div class="random_btn_container">
+                        <input class="random_btn" type="submit" value="자리배치">
+                    </div>
+        </form>
+    </div>
+    </div>
+
+    </div>
+
+</body>
+
+</html>
