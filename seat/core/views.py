@@ -1,16 +1,16 @@
 from django.shortcuts import render, redirect
 from .models import Babylion
-import random
 
 def main(request):
     lions = Babylion.objects.all()
+    par_lions=Babylion.objects.filter(part=True).order_by('?')
+        
     context = {
         'lions':lions,
+        'par_lions':par_lions,
     }
 
     return render(request, 'core/main.html', context)
-
-
 
 def random(request):
     lions = Babylion.objects.all()
@@ -24,11 +24,4 @@ def random(request):
             else:
                 lion.part = False
                 lion.save()
-
-        par_lion=Babylion.objects.filter(part="True").order_by('?')
-        print(par_lion)
-
-        # for i in par_lion:
-        #     print(i,"@@")
-
     return redirect('main')

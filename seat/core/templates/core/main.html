@@ -7,10 +7,25 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     <style>
+        @font-face {
+            font-family: 'yg-jalnan';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_four@1.2/JalnanOTF00.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'KimNamyun';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/KimNamyun.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
         body {
             display: flex;
             justify-content: center;
             align-items: center;
+            background: black;
 
         }
 
@@ -19,13 +34,21 @@
         }
 
         .title {
+            font-family: 'yg-jalnan';
             text-align: center;
+            font-size: 100px;
+            margin-bottom: 30px;
+            color: white;
         }
 
         .content {
             display: flex;
-            width: 100%;
+            width: 80%;
+            margin: 0 auto;
             column-count: 2;
+            background: white;
+            border: 1px solid white;
+
         }
 
         .left_content {
@@ -38,16 +61,45 @@
             padding: 30px;
         }
 
-        .par {
-            border: 1px solid black;
-            padding: 30px;
+        .par_list {
+            border-collapse: collapse;
             display: flex;
-            justify-content: space-around;
+            flex-wrap: wrap;
         }
 
+        .par {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 15px;
+            display: flex;
+            justify-content: space-around;
+            width: 50%;
+            box-sizing: border-box;
+            font-family: 'KimNamyun';
+
+        }
+
+        .par:hover {
+            background: #e2dddd;
+        }
+
+        .par_check_container {}
+
         .par_check {
+            display: none;
+        }
+
+        input[class="par_check"]+label {
+            position: relative;
+            display: inline-block;
             width: 20px;
             height: 20px;
+            border: 2px solid #bcbcbc;
+            cursor: pointer;
+        }
+
+        input[class="par_check"]:checked+label {
+            background-color: #666666;
         }
 
         .teacher_seat_container {
@@ -55,6 +107,12 @@
             justify-content: center;
             margin-bottom: 50px;
 
+        }
+
+        .seat {
+            border-radius: 10px;
+            text-align: center;
+            font-family: 'KimNamyun';
         }
 
         .teacher_seat {
@@ -86,9 +144,19 @@
         }
 
         .random_btn {
+            font-size: 30px;
 
-            padding: 30px;
-            font-size: 50px;
+            background-color: black;
+            border: none;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 10px;
+            font-family: 'KimNamyun';
+
         }
     </style>
 </head>
@@ -108,40 +176,29 @@
                                 {{lion.name}}
                             </div>
                             <div class="par_check_container">
-                                <input class="par_check" name="{{lion.name}}" type="checkbox">
+                                <input class="par_check" id="{{lion.id}}" name="{{lion.name}}" type="checkbox">
+                                <label for="{{lion.id}}"></label>
                             </div>
 
                         </div>
 
                         {% endfor %}
+
+
                     </div>
                 </div>
                 <div class="right_content">
                     <div class="teacher_seat_container">
-                        <div class="teacher_seat">
+                        <div class="teacher_seat seat">
                             강민성
                         </div>
-
                     </div>
                     <div class="student_seat_container">
-                        <div class="student_seat">
-                            김상현
+                        {% for par_lion in par_lions %}
+                        <div class="student_seat seat">
+                            {{par_lion.name}}
                         </div>
-                        <div class="student_seat">
-                            이성빈
-                        </div>
-                        <div class="student_seat">
-                            김상현
-                        </div>
-                        <div class="student_seat">
-                            이성빈
-                        </div>
-                        <div class="student_seat">
-                            김상현
-                        </div>
-                        <div class="student_seat">
-                            이성빈
-                        </div>
+                        {% endfor %}
                     </div>
                     <div class="random_btn_container">
                         <input class="random_btn" type="submit" value="자리배치">
